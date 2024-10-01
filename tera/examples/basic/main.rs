@@ -1,5 +1,6 @@
-use std::error::Error;
-use tera::{Context, Kwargs, State, Tera, Value};
+// use std::error::Error;
+// use tera::{Context, Kwargs, State, Tera, Value};
+use tera::{Kwargs, State, Value};
 
 pub fn do_nothing_filter(value: Value, _: Kwargs, _: &State) -> Value {
     value

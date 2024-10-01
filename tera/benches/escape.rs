@@ -1,7 +1,8 @@
-use std::path::PathBuf;
+// use std::path::PathBuf;
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
-use serde_derive::Serialize;
+// use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
+// use serde_derive::Serialize;
 
 use tera::escape_html;
 
@@ -62,6 +63,7 @@ const HTML_VERY_LONG: &str = r#"
     justo.
 </p>"#;
 
+#[allow(unused_must_use)]
 fn criterion_benchmark(c: &mut Criterion) {
     c.bench_function("escape_html_short", |b| {
         b.iter(|| {

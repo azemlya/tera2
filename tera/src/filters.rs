@@ -674,20 +674,20 @@ mod tests {
         let state = State::new(&ctx);
         assert_eq!(
             float("1".into(), Kwargs::default(), &state).unwrap(),
-            1.0.into()
+            1.0
         );
         assert_eq!(
             float("3.14".into(), Kwargs::default(), &state).unwrap(),
-            3.14.into()
+            3.14
         );
         assert_eq!(
             float(1.into(), Kwargs::default(), &state).unwrap(),
-            1.0.into()
+            1.0
         );
         // noop
         assert_eq!(
             float(1.12.into(), Kwargs::default(), &state).unwrap(),
-            1.12.into()
+            1.12
         );
         // Doesn't make sense
         assert!(float("hello".into(), Kwargs::default(), &state).is_err());

@@ -6,8 +6,6 @@ use std::fmt::Formatter;
 use std::hash::{Hash, Hasher};
 use std::sync::Arc;
 
-#[cfg(feature = "preserve_order")]
-use indexmap::IndexMap;
 use serde::ser::{Serialize, SerializeMap, SerializeSeq, Serializer};
 
 mod de;
@@ -21,11 +19,14 @@ use crate::value::number::Number;
 use crate::{escape_html, HashMap};
 pub use key::Key;
 
-#[cfg(not(feature = "preserve_order"))]
-pub type Map = HashMap<Key<'static>, Value>;
+#[cfg(feature = "preserve_order")]
+use indexmap::IndexMap;
 
 #[cfg(feature = "preserve_order")]
 pub type Map = IndexMap<Key<'static>, Value>;
+
+#[cfg(not(feature = "preserve_order"))]
+pub type Map = HashMap<Key<'static>, Value>;
 
 #[inline]
 pub(crate) fn format_map(map: &Map, f: &mut impl std::io::Write) -> std::io::Result<()> {

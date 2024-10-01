@@ -1,15 +1,13 @@
+use std::collections::BTreeMap;
+
 use crate::parsing::Chunk;
 use crate::vm::for_loop::ForLoop;
 use crate::vm::stack::Stack;
-use crate::{Context, Value};
-
+use crate::{Context, Value, HashMap};
 use crate::utils::Span;
-use std::collections::{BTreeMap, HashMap};
-
 
 /// Special string indicating request to dump context
-static MAGICAL_DUMP_VAR: &str = "__tera_context";
-
+static MAGICAL_DUMP_VAR: &str = "__global_context";
 
 /// The state of the interpreter.
 /// We pass it around rather than put it on the VM to avoid multiple borrow issues

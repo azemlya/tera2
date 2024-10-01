@@ -265,6 +265,10 @@ impl Value {
         Value::String(Arc::from(val), StringKind::Safe)
     }
 
+    pub fn normal_string(val: &str) -> Value {
+        Value::String(Arc::from(val), StringKind::Normal)
+    }
+
     fn as_i128(&self) -> Option<i128> {
         match self {
             Value::U64(v) => Some(*v as i128),

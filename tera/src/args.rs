@@ -6,6 +6,13 @@ use crate::value::number::Number;
 use crate::value::{Key, Map};
 use crate::Value;
 
+#[cfg(feature = "preserve_order")]
+use indexmap::map::Iter;
+
+#[cfg(not(feature = "preserve_order"))]
+use hashbrown::hash_map::Iter;
+
+
 pub trait ArgFromValue<'k> {
     type Output;
 
@@ -185,6 +192,16 @@ impl Kwargs {
         } else {
             Err(Error::missing_arg(key))
         }
+    }
+
+    pub fn get_def(&self, key: &str, default: Value) -> Value {
+        if let Ok(op) = self.get::<Value>(key) {
+            if let Some(v) = op { v } else { default }
+        } else { default }
+    }
+    
+    pub fn iter(&self) -> Iter<'_, Key<'_>, Value> {
+        self.values.iter()
     }
 }
 
